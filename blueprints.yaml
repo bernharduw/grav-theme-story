@@ -15,9 +15,23 @@ license: MIT
 form:
   validation: loose
   fields:
-    footer.text:
+    google_maps_api_key:
       type: text
+      label: Google Maps API Key
+
+    header.subtitle:
+      type: text
+      label: Subtitle
+    header.contact:
+      type: editor
+      label: Contact Data
+
+    footer.text:
+      type: editor
       label: Footer Text
+    footer.secondary:
+      type: editor
+      label: Footer Secondary Text
     footer.icon:
       type: list
       label: Footer Icons
