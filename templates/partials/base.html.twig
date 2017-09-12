@@ -3,7 +3,7 @@
 
 <html>
 	<head>
-		<title>{{site.title}}</title>
+		<title>{{page.title}} | {{site.title}} | {{ theme_config.header.subtitle }}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		{% do assets.addCss('theme://css/main.css') %}
@@ -13,34 +13,70 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
+				<header id="header">
+					<div id="logo">
+						<h3 class="title"><a href="{{ base_url == '' ? '/' : base_url }}">{{ site.title }}</a></h3>
+						<div class="contact-data">{{ theme_config.header.contact | markdown }}</div>
+					</div>
+					<div id="navbar">
+						{% block header_extra %}{% endblock %}
 
-                {% block content %}
-                {% endblock %}
+						{% if config.plugins.langswitcher.enabled %}
+							{% include 'partials/langswitcher.html.twig' %}
+						{% endif %}
+
+						<nav id="navPanel" class="main-navigation">
+							{% block header_navigation %}
+								{% include 'partials/navigation.html.twig' %}
+							{% endblock %}
+						</nav>
+
+						<div id="navButton">
+							<a href="#navPanel" class="toggle"></a>
+						</div>
+					</div>
+				</header>
+
+	      {% block content %}
+	      {% endblock %}
 
 				<!-- Footer -->
-					<footer class="wrapper style1 align-center">
-						<div class="inner">
-							<ul class="icons">
-								{% for icons in theme_config.footer.icon %}
-								
-								<li><a href="{{icons.link}}" class="icon style2 fa-{{icons.name}}"><span class="label">{{icons.title}}</span></a></li>
+					<footer id="footer" class="spotlight half wrapper style1 color1 invert">
+						<div class="content">
+							{{ theme_config.footer.text | markdown }}
+						</div>
+
+						<div class="secondary">
+							<h4>Seiten</h4>
+							<ul class="footer-navigation navigation">
+								{% for page in pages.children.visible %}
+										{% set current_page = (page.active or page.activeChild) ? 'active' : '' %}
+										<li class="{{ current_page }}">
+												<a href="{{ page.url }}">
+														{% if page.header.icon %}<i class="fa fa-{{ page.header.icon }}"></i>{% endif %}
+														{{ page.menu }}
+												</a>
+										</li>
 								{% endfor %}
-								
 							</ul>
-							<p>{{ theme_config.footer.text }}</p>
+
+							{{ theme_config.footer.secondary | markdown }}
 						</div>
 					</footer>
 
 			</div>
 
 		<!-- Scripts -->
-			{% do assets.addJs('theme://js/jquery.min.js', 120) %}
-			{% do assets.addJs('theme://js/jquery.scrollex.min.js', 119) %}
-			{% do assets.addJs('theme://js/jquery.scrolly.min.js', 118) %}
+			{% do assets.addJs('theme://js/jquery.min.js', 121) %}
+			{% do assets.addJs('theme://js/jquery.scrollex.min.js', 120) %}
+			{% do assets.addJs('theme://js/jquery.scrolly.min.js', 119) %}
+			{% do assets.addJs('theme://js/jquery.dropotron.min.js', 118) %}
 			{% do assets.addJs('theme://js/skel.min.js', 117) %}
 			{% do assets.addJs('theme://js/util.js', 116) %}
 			{% do assets.addJs('theme://js/main.js', 115) %}
-            {{ assets.js() }}
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{theme_config.google_maps_api_key}}" type="text/javascript" ></script>
+{{ assets.js() }}
 
 	</body>
 </html>
