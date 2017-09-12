@@ -1,12 +1,14 @@
 				<!-- Seven -->
-					<section class="wrapper style1 align-center">
-						<div class="inner medium">
+					<section class="spotlight style1 onscroll-image-fade-in {{ page.header.body_classes }}">
+						<div class="content">
 							<h2>{{page.title}}</h2>
 							{{ content }}
+								{#
 								{% include "forms/form.html.twig" %}
+								#}
 							{#<form method="post" action="#">
-								  
-    						
+
+
 								<div class="field half first">
 									<label for="name">Name</label>
 									<input type="text" name="name" id="name" value="" />
@@ -25,5 +27,7 @@
 							</form>#}
 
 						</div>
-					</section>
 
+						<div class="image google-map">
+						</div>
+					</section>
