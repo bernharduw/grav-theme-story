@@ -1,15 +1,20 @@
 
 
 				<!-- Two -->
-					<section class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+					<section id="{{ page.slug }}" class="spotlight style1 image-position-center onscroll-image-fade-in  {{ page.header.body_classes }}">
 						<div class="content">
-                            <h2>{{ page.title }}</h2>
+							<header>
+								<h2>{{ page.title }}</h2>
+								<p>{{ page.header.subtitle }}</p>
+							</header>
                             {{ page.content }}
 							<ul class="actions vertical">
-								<li><a href="#" class="button">Learn More</a></li>
+							{% for action in page.header.actions %}
+								<li><a href="{{ action.link }}" class="button">{{action.text}}</a></li>
+							{% endfor %}
 							</ul>
 						</div>
 						<div class="image">
-                            {{ page.media[header.bannerimg].cropZoom(1440,900) }}
-                        </div>
+              {{ page.media[header.bannerimg].derivatives(320, 2560, 320).sizes('(max-width:480px) 100vw, (orientation: portrait) 100vw, 50vw').html() }}
+            </div>
 					</section>

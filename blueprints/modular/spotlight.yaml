@@ -11,4 +11,17 @@ form:
                 type: filepicker
                 preview_images: true
                 label: Banner Image
-             
+              header.subtitle:
+                type: text
+                label: Subtitle
+                ordering@: title
+              header.actions:
+                type: list
+                label: Actions
+                fields:
+                  .link:
+                    type: text
+                    label: Link
+                  .text:
+                    type: text
+                    label: Text
