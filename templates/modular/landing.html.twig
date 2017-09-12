@@ -1,14 +1,19 @@
 
 				<!-- One -->
-					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+					<section class="banner style1 orient-left content-align-left fullscreen onload-image-fade-in onload-content-fade-right {{ page.header.body_classes }}">
 						<div class="content">
+							<header>
                             <h1>{{ page.title }}</h1>
+														<p>{{ page.header.subtitle }}</p>
+							</header>
                             {{ page.content }}
 							<ul class="actions vertical">
-								<li><a href="#first" class="button big wide smooth-scroll-middle">Get Started</a></li>
+							{% for action in page.header.actions %}
+								<li><a href="{{ action.link }}" class="button big wide smooth-scroll-middle">{{ action.text }}</a></li>
+							{% endfor %}
 							</ul>
 						</div>
 						<div class="image">
-                            {{ page.media[header.bannerimg] }}
+							{{ page.media[header.bannerimg].derivatives(320, 2560, 320).sizes('(orientation: portrait) 100vw, 50vw').html() }}
 						</div>
 					</section>
